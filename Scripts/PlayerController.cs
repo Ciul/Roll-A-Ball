@@ -3,21 +3,24 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float moveHorizontal;
-	public float moveVertical;
-	Vector3 position;
-
-	void Start () {
-		position = transform.position;
+	public float speed;
+	public GameObject ball;
+	
+	private Rigidbody rb;
+	
+	void Start ()
+	{
+		rb = ball.GetComponent<Rigidbody>();
 	}
 	
-	void Update () {
-		moveHorizontal 		= Input.GetAxis ("Horizontal");
-		moveVertical 		= Input.GetAxis ("Vertical");
-		Vector3 movement 	= new Vector3 (moveHorizontal, 0.0f, moveVertical);
-
-		position = position + movement;
-		gameObject.transform.position = position;
+	void FixedUpdate ()
+	{
+		float moveHorizontal = Input.GetAxis ("Horizontal");
+		float moveVertical = Input.GetAxis ("Vertical");
+		
+		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+		
+		rb.AddForce (movement * speed);
 	}
 
 }
