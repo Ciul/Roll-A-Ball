@@ -4,13 +4,12 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
-	public GameObject ball;
 	
 	private Rigidbody rb;
 	
 	void Start ()
 	{
-		rb = ball.GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody>();
 	}
 	
 	void FixedUpdate ()
@@ -21,6 +20,13 @@ public class PlayerController : MonoBehaviour {
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 		
 		rb.AddForce (movement * speed);
+	}
+
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.tag == "Pick Up") {
+			other.gameObject.SetActive (false);
+			// Destroy (other.gameObject);
+		}
 	}
 
 }
