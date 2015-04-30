@@ -45,7 +45,12 @@ public class PlayerController : MonoBehaviour {
 		countText.text = "Points: " + count.ToString ();
 		if (count >= pickUpCount) {
 			winText.text = "You Win!";
+			Invoke ("LoadLevel", 3);
 		}
+	}
+
+	void LoadLevel () {
+		Application.LoadLevel (0);
 	}
 
 }
